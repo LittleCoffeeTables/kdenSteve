@@ -15,6 +15,7 @@ class InputHandler(object):
 			key = self.__stdscr.getkey()
 		except curses.error:
 			return
+		#EQ.put("debug", {"text":"input %s %i"%(key, i)})
 		if key in kcfg.quit:
 			EQ.put("quit", {})
 		elif key in kcfg.up:

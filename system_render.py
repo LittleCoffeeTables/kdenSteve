@@ -11,5 +11,5 @@ class Renderer(object):
 				(0,0, curses.COLS-1,curses.LINES-1))
 		curses.doupdate()
 
-	def move_camera(self, to):
-		self.__mscr.update_coords(to)
+	#def move_camera(self, to):
+	#	self.__mscr.update_coords(to)

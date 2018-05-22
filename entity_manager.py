@@ -1,4 +1,6 @@
 import collections
+import json
+import ast
 
 
 class EntityManager(object):
@@ -10,6 +12,40 @@ class EntityManager(object):
 	def new_entity(self):
 		self.__max_entity += 1
 		return self.__max_entity
+
+	def save(self, fname):
+		#def dumper(dict_):
+		#	if type(dict_) not in (dict, collections.defaultdict):
+		#		return dict_
+		#	new = {str(k):dumper(v) for k, v in
+		#		dict_.items()}
+			#return json.dumps(new)
+		#	return new
+		#prop_string = json.dumps(dumper(self.__all_properties))
+		prop_string = str(dict(self.__all_properties))
+		with open(fname, "w") as f:
+			f.write("%i\n"%(self.__max_entity))
+			f.write(prop_string)
+
+	def load(self, fname):
+		#this is dumb
+		#def loader(x):
+		#	if type(x[0][1]) == dict:
+		#		return collections.defaultdict(dict, x)
+		#	else:
+		#		return ast.literal_eval(x)
+		with open(fname, "r") as f:
+			things = f.read().split('\n')
+			self.__max_entities = int(things[0])
+			#self.__all_properties = json.loads(things[1],
+			#		object_pairs_hook=loader)
+			self.__all_properties = collections.defaultdict(
+					dict, ast.literal_eval(things[1]))
+		#with open("derp.log", "w") as f:
+		#	for prop in self.__all_properties:
+		#		f.write("%s %s\n"%(
+		#			prop, self.get_value(0, prop)))
+			#f.write(self.__all_properties.__repr__())
 
 	def create_entity(self, properties):
 		i = self.new_entity()

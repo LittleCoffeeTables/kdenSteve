@@ -3,6 +3,8 @@ import curses
 
 class MainScreen(object):
 	def __init__(self, width, height, EM):
+		# height+1 because you cannot write to the bottom-right-most
+		# spot of a pad/window, this is a workaround
 		self.__scr = curses.newpad(height+1, width)
 		#self.__EM = EM
 		self.__coords = (0,0)
@@ -21,9 +23,6 @@ class MainScreen(object):
 		priorities = sorted(entities, key=lambda x: x[1])
 		for entity, priority in priorities:
 			pos = EM.get_value(entity, "r_pos")
-			#assert(pos == EM.get_value(entity, "p_pos"))
-			#EQ.put("debug", {"text":"helloisms %i %i"%(
-			#	pos[0],pos[1])})
 			char = EM.get_value(entity, "r_char")
 			if pos is not None and char is not None:
 				self.__scr.addch(pos[1], pos[0], char)
