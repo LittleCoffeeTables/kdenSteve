@@ -53,6 +53,11 @@ class EntityManager(object):
 			self.__all_properties[prop][i] = value
 		return i
 
+	def rm_entity(self, eid):
+		for prop, vals in self.__all_properties.items():
+			if eid in vals:
+				del vals[eid]
+
 	def create_tile(self, pos, properties):
 		self.__all_properties["tile"][pos] = True
 		self.__all_properties["p_pos"][pos] = pos
@@ -70,6 +75,8 @@ class EntityManager(object):
 					"physical": True,
 					"ai": "orc",
 					"blood": 1000,
+					"health": 20,
+					"attack_dmg": 3,
 					}
 
 		if prefab_props is not None:
@@ -96,6 +103,11 @@ class EntityManager(object):
 
 	def set_value(self, i, prop, value):
 		self.__all_properties[prop][i] = value
+
+	def rm_value(self, i, prop, noerror=False):
+		if noerror and i not in self.__all_properties[prop]:
+			return
+		del self.__all_properties[prop][i]
 
 	def has_prop(self, i, prop):
 		return (i in self.__all_properties[prop])

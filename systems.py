@@ -3,6 +3,8 @@ import system_input
 import system_movement
 import system_render
 import system_logger
+import system_attack
+import system_corpses
 
 import collections
 
@@ -15,7 +17,9 @@ class SystemsManager(object):
 		self.__systems = [
 				system_input.InputHandler(DEFAULT_PLAYER,
 					stdscr),
+				system_attack.Attacks(),
 				system_movement.Movement(),
+				system_corpses.Corpses(),
 				system_render.Renderer(stdscr, MS),
 				system_logger.Logger(),
 				]

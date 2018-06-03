@@ -19,13 +19,13 @@ class InputHandler(object):
 		if key in kcfg.quit:
 			EQ.put("quit", {})
 		elif key in kcfg.up:
-			EQ.put("move", {"eid":i, "dir":(0,-1)})
+			EQ.put("move_or_attack", {"eid":i, "dir":(0,-1)})
 		elif key in kcfg.down:
-			EQ.put("move", {"eid":i, "dir":(0,1)})
+			EQ.put("move_or_attack", {"eid":i, "dir":(0,1)})
 		elif key in kcfg.left:
-			EQ.put("move", {"eid":i, "dir":(-1,0)})
+			EQ.put("move_or_attack", {"eid":i, "dir":(-1,0)})
 		elif key in kcfg.right:
-			EQ.put("move", {"eid":i, "dir":(1,0)})
+			EQ.put("move_or_attack", {"eid":i, "dir":(1,0)})
 		else:
 			curses.beep()
 

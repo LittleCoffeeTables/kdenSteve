@@ -14,6 +14,9 @@ class EventQueue(object):
 		item = self.__queues[evtype][index]
 		return item
 
+	def pop(self, evtype):
+		return self.__queues[evtype].pop()
+
 	def can_get(self, evtype, index):
 		return index < len(self.__queues[evtype])
 

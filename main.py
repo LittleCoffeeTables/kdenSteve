@@ -18,7 +18,8 @@ def main(stdscr):
 
 	EM = entities.EntityManager()
 	EM.create_entity({"p_pos":[3,7], "physical":True,
-		"r_char":"@", "r_pos":[3,7], "r_prio":900, "camera":True})
+		"r_char":"@", "r_pos":[3,7], "r_prio":900, "camera":True,
+		"health":30, "attack_dmg":6})
 
 	d_size = (100, 100)
 
