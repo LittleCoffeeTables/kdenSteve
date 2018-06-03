@@ -14,6 +14,12 @@ class Dungeon(object):
 				 or y == self.__size[1] - 1):
 					material = "wall"
 				self.create_tile(pos, material)
+		self.populate()
+
+
+	def populate(self):
+		#place monsters and shiz
+		self.__EM.quick_entity("orc", (20,10))
 
 	def create_tile(self, pos, mat):
 		if mat == "wall":

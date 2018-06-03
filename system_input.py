@@ -26,4 +26,6 @@ class InputHandler(object):
 			EQ.put("move", {"eid":i, "dir":(-1,0)})
 		elif key in kcfg.right:
 			EQ.put("move", {"eid":i, "dir":(1,0)})
+		else:
+			curses.beep()
 

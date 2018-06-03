@@ -1,4 +1,4 @@
-import entity_manager
+import entities
 import systems
 #import event_queue
 #import input_handler
@@ -16,7 +16,7 @@ def main(stdscr):
 	f = open("debug.log", "w")
 	f.close()
 
-	EM = entity_manager.EntityManager()
+	EM = entities.EntityManager()
 	EM.create_entity({"p_pos":[3,7], "physical":True,
 		"r_char":"@", "r_pos":[3,7], "r_prio":900, "camera":True})
 
@@ -30,7 +30,7 @@ def main(stdscr):
 
 	stdscr.nodelay(True)
 
-	EM.load("derp")
+	#EM.load("derp")
 
 	quit = 0
 	while not quit:

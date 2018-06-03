@@ -19,7 +19,7 @@ class MainScreen(object):
 			i+=1
 			self.update_coords(event["to"])
 
-		entities = EM.get_by_prop("r_prio").items()
+		entities = EM.get_prop("r_prio").items()
 		priorities = sorted(entities, key=lambda x: x[1])
 		for entity, priority in priorities:
 			pos = EM.get_value(entity, "r_pos")

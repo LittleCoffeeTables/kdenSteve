@@ -60,11 +60,42 @@ class EntityManager(object):
 		for prop, value in properties.items():
 			self.__all_properties[prop][pos] = value
 
-	def get_by_prop(self, prop):
+	def quick_entity(self, prefab_name, pos, ow={}):
+		prefab_props = None
+		if prefab_name == "orc":
+			prefab_props = {
+					"r_char": "o",
+					"r_colour": "green",
+					"r_prio": 100,
+					"physical": True,
+					"ai": "orc",
+					"blood": 1000,
+					}
+
+		if prefab_props is not None:
+			ow["p_pos"] = pos
+			ow["r_pos"] = pos
+			all_props = collections.ChainMap(ow, prefab_props)
+			self.create_entity(all_props)
+
+	def get_prop(self, prop):
 		return self.__all_properties[prop]
+
+	def get_by_prop(self, prop):
+		return self.__all_properties[prop].keys()
+
+	def get_by_props(self, props):
+		dicts = []
+		for prop in props:
+			dicts.append(self.__all_properties[prop])
+		#create set of the keys in common across all dicts
+		return set.intersection(*map(set, dicts))
 
 	def get_value(self, i, prop, default=None):
 		return self.__all_properties[prop].get(i, default)
+
+	def set_value(self, i, prop, value):
+		self.__all_properties[prop][i] = value
 
 	def has_prop(self, i, prop):
 		return (i in self.__all_properties[prop])
@@ -74,4 +105,20 @@ class EntityManager(object):
 			if i not in self.__all_properties[prop]:
 				return False
 		return True
+
+	def edit_value(self, i, prop, 
+			set=None, add=None, multi=None, invert=None):
+		if not self.has_prop(i, prop):
+			raise KeyError
+		val = self.get_value(i, prop)
+		if set is not None:
+			val = set
+		if add is not None:
+			val += add
+		if multi is not None:
+			val *= multi
+		if invert is not None:
+			val = not val
+		self.set_value(i, prop, val)
+
 

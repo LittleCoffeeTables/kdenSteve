@@ -18,7 +18,8 @@ class Movement(object):
 		pos = EM.get_value(eid, "p_pos")
 		new_pos = (pos[0]+dir_[0], pos[1]+dir_[1])
 		if EM.has_prop(eid, "physical"):
-			for other in EM.get_by_prop("physical").keys():
+			for other in (
+			 EM.get_by_props(["physical", "p_pos"])):
 				if other == eid:
 					continue
 				if new_pos == EM.get_value(other, "p_pos"):
