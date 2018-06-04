@@ -26,6 +26,9 @@ class Movement(object):
 					return False
 		#pos[0] = new_pos[0]; pos[1] = new_pos[1]
 		EM.set_value(eid, "p_pos", new_pos)
+		cost = 1 #TODO
+		if EM.has_prop(eid, "ap"):
+			EM.edit_value(eid, "ap", add=-cost)
 		if EM.has_prop(eid, "r_pos"):
 			#r_pos = EM.get_value(eid, "r_pos")
 			#r_pos[0] = pos[0]; r_pos[1] = pos[1]

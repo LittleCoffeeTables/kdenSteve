@@ -53,6 +53,8 @@ class Attacks(object):
 		  and EM.has_prop(eid, "attack_dmg")):
 			dmg = EM.get_value(eid, "attack_dmg")
 			EM.edit_value(target, "health", add=-dmg)
+			cost = 1 #TODO: attacks that cost more than 1 ap
+			EM.edit_value(eid, "ap", add=-cost)
 			curses.beep()
 
 

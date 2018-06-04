@@ -5,6 +5,8 @@ import system_render
 import system_logger
 import system_attack
 import system_corpses
+import system_ai
+import system_actions
 
 import collections
 
@@ -15,8 +17,10 @@ class SystemsManager(object):
 	def __init__(self, entityManager, stdscr, MS):
 		self.__EM = entityManager
 		self.__systems = [
+				system_actions.Actions(),
 				system_input.InputHandler(DEFAULT_PLAYER,
 					stdscr),
+				system_ai.AI(),
 				system_attack.Attacks(),
 				system_movement.Movement(),
 				system_corpses.Corpses(),

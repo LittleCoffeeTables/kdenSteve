@@ -16,5 +16,8 @@ class Corpses(object):
 					continue
 				EM.set_value(e, "r_char", "%")
 				EM.edit_value(e, "r_prio", multi=0.04)
-				EM.rm_value(e, "physical", noerror=True)
 				EM.rm_value(e, "health")
+				EM.rm_values(e, [
+					"physical", "ai", "ap", "max_ap",
+					"controlled", ],
+					noerror=True)

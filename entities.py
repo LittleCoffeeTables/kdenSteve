@@ -79,6 +79,9 @@ class EntityManager(object):
 					"blood": 1000,
 					"health": 20,
 					"attack_dmg": 3,
+					"target": 0, #for testing
+					"ap": 0,
+					"max_ap": 3,
 					}
 
 		if prefab_props is not None:
@@ -110,6 +113,10 @@ class EntityManager(object):
 		if noerror and i not in self.__all_properties[prop]:
 			return
 		del self.__all_properties[prop][i]
+
+	def rm_values(self, i, props, noerror=False):
+		for prop in props:
+			self.rm_value(i, prop, noerror)
 
 	def has_prop(self, i, prop):
 		return (i in self.__all_properties[prop])

@@ -22,10 +22,11 @@ def main(stdscr):
 	f.close()
 
 	EM = entities.EntityManager()
-	EM.create_entity({"p_pos":(3,7), "physical":True,
+	EM.create_entity({"controlled": True, "p_pos":(3,7), "physical":True,
 		"r_char":"@", "r_pos":(3,7), "r_prio":900, "camera":True,
 		"health":30, "attack_dmg":6, "blood":1000,
-		"r_colour": curses.COLOR_BLACK})
+		"r_colour": curses.COLOR_BLACK,
+		"ap":3, "max_ap":3})
 
 	d_size = (100, 100)
 
