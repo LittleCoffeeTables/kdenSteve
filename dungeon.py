@@ -1,4 +1,4 @@
-
+import curses #for colours
 
 class Dungeon(object):
 	def __init__(self, size, EM):
@@ -24,9 +24,15 @@ class Dungeon(object):
 	def create_tile(self, pos, mat):
 		if mat == "wall":
 			self.__EM.create_tile(pos, {"material":mat,
-				"r_char":"#", "r_prio":1000, "physical":True})
+				"r_char":"#", "r_prio":1000, "physical":True,
+				"r_colour": curses.COLOR_BLACK,
+				"bg_colour": curses.COLOR_WHITE,
+				})
 		elif mat == "floor":
 			self.__EM.create_tile(pos, {"material":mat,
-				"r_char":".", "r_prio":0})
+				"r_char":".", "r_prio":0,
+				"r_colour": curses.COLOR_BLACK,
+				"bg_colour": curses.COLOR_WHITE,
+				})
 
 

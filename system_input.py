@@ -28,4 +28,5 @@ class InputHandler(object):
 			EQ.put("move_or_attack", {"eid":i, "dir":(1,0)})
 		else:
 			curses.beep()
+		EQ.put("refresh", {})
 

@@ -2,6 +2,8 @@ import collections
 import json
 import ast
 
+#for colours
+import curses
 
 class EntityManager(object):
 	def __init__(self):
@@ -70,7 +72,7 @@ class EntityManager(object):
 		if prefab_name == "orc":
 			prefab_props = {
 					"r_char": "o",
-					"r_colour": "green",
+					"r_colour": curses.COLOR_GREEN,
 					"r_prio": 100,
 					"physical": True,
 					"ai": "orc",

@@ -13,13 +13,19 @@ def main(stdscr):
 	stdscr.clear()
 	curses.curs_set(False)
 
+	#init colour pairs
+	for fg in range(8):
+		for bg in range(8):
+			curses.init_pair(1 + 8 * fg + bg, fg, bg)
+
 	f = open("debug.log", "w")
 	f.close()
 
 	EM = entities.EntityManager()
-	EM.create_entity({"p_pos":[3,7], "physical":True,
-		"r_char":"@", "r_pos":[3,7], "r_prio":900, "camera":True,
-		"health":30, "attack_dmg":6})
+	EM.create_entity({"p_pos":(3,7), "physical":True,
+		"r_char":"@", "r_pos":(3,7), "r_prio":900, "camera":True,
+		"health":30, "attack_dmg":6, "blood":1000,
+		"r_colour": curses.COLOR_BLACK})
 
 	d_size = (100, 100)
 
@@ -32,6 +38,8 @@ def main(stdscr):
 	stdscr.nodelay(True)
 
 	#EM.load("derp")
+
+	SM.event("refresh", {})
 
 	quit = 0
 	while not quit:

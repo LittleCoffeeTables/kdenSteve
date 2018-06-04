@@ -34,5 +34,5 @@ class SystemsManager(object):
 		return 0
 
 	def event(self, evtype, item):
-		self.__EQ[evtype].put(item)
+		self.__EQ.put(evtype, item)
 

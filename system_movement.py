@@ -24,13 +24,15 @@ class Movement(object):
 					continue
 				if new_pos == EM.get_value(other, "p_pos"):
 					return False
-		pos[0] = new_pos[0]; pos[1] = new_pos[1]
+		#pos[0] = new_pos[0]; pos[1] = new_pos[1]
+		EM.set_value(eid, "p_pos", new_pos)
 		if EM.has_prop(eid, "r_pos"):
-			r_pos = EM.get_value(eid, "r_pos")
-			r_pos[0] = pos[0]; r_pos[1] = pos[1]
+			#r_pos = EM.get_value(eid, "r_pos")
+			#r_pos[0] = pos[0]; r_pos[1] = pos[1]
+			EM.set_value(eid, "r_pos", new_pos)
 		if EM.has_prop(eid, "camera"):
 			EQ.put("move_camera",
-					{"to":tuple(pos)})
+					{"to":tuple(new_pos)})
 		
 		return True
 

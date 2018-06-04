@@ -8,6 +8,9 @@ class Corpses(object):
 		maybe_new_corpses = EM.get_by_props(["p_pos", "health"])
 		for e in maybe_new_corpses:
 			if EM.get_value(e, "health") <= 0:
+				pos = EM.get_value(e, "p_pos")
+				if EM.has_prop(e, "blood"):
+					EM.set_value(pos, "bloody", True)
 				if EM.has_prop(e, "gibbed"):
 					EM.rm_entity(e)
 					continue
