@@ -10,20 +10,26 @@ class Attacks(object):
 		while EQ.can_get("attack", i):
 			event = EQ.get("attack", i)
 			i += 1
-			self.try_attack(EM, EQ, event["eid"], event["dir"],
+			self.try_attack(EM, EQ, event,
 					False)
 		while EQ.can_get("move_or_attack", 0):
 			event = EQ.pop("move_or_attack")
-			if not self.try_attack(EM, EQ, event["eid"],
-			  event["dir"], True):
+			if not self.try_attack(EM, EQ, event, True):
 				EQ.put("move", event)
 
-	def try_attack(self, EM, EQ, eid, dir_, auto):
+	def try_attack(self, EM, EQ, event, auto):
+		eid = event["eid"]
 		#is a physical position really necessary to attack?
 		if not EM.has_prop(eid, "p_pos"):
 			return False
 		pos = EM.get_value(eid, "p_pos")
-		new_pos = (pos[0]+dir_[0], pos[1]+dir_[1])
+		if "dir" in event:
+			new_pos = (pos[0]+event["dir"][0],
+				   pos[1]+event["dir"][1])
+		elif "to" in event:
+			new_pos = event["to"]
+		else:
+			raise ValueError("event has no dir or to: "+str(event))
 		other = None
 		if auto:
 			others = EM.get_by_props([
@@ -55,6 +61,7 @@ class Attacks(object):
 			EM.edit_value(target, "health", add=-dmg)
 			cost = 1 #TODO: attacks that cost more than 1 ap
 			EM.edit_value(eid, "ap", add=-cost)
+			EM.set_value(eid, "attacked_this_turn", True)
 			curses.beep()
 
 

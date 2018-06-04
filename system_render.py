@@ -29,9 +29,10 @@ class Renderer(object):
 		
 		ap = EM.get_value(self.__player_id, "ap")
 		max_ap = EM.get_value(self.__player_id, "max_ap")
-		ap_str = "{0:>1}/{1:>1}".format(ap, max_ap)
 		if ap is None:
 			ap_str = "N/A"
+		else:
+			ap_str = "{0:>1}/{1:>1}".format(ap, max_ap)
 		apc = self.get_color_pair(curses.COLOR_BLUE, curses.COLOR_BLACK)
 		self.__stdscr.addch(curses.ACS_DARROW, apc)
 		self.__stdscr.addstr(ap_str, apc)

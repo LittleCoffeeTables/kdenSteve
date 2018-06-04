@@ -1,3 +1,7 @@
+#entities
+
+import math
+import random
 import collections
 import json
 import ast
@@ -90,6 +94,25 @@ class EntityManager(object):
 			all_props = collections.ChainMap(ow, prefab_props)
 			self.create_entity(all_props)
 
+	def __rng(self, rng_type, func):
+		# load seed, roll, save seed
+		if rng_type not in (None, "entity_rng", "dungeon_rng"):
+			raise ValueError("Invalid RNG type %s"%rng_type)
+		if rng_type in self.__all_properties["rng"]:
+			random.setstate(self.__all_properties["rng"][rng_type])
+		elif rng_type is not None:
+			random.seed()
+
+		out = func()
+		if rng_type is not None:
+			self.__all_properties["rng"][rng_type] = \
+					random.getstate()
+		return out
+
+	def randint(self, min_, max_, rng=None):
+		f = lambda: random.randint(min_, max_) 
+		return self.__rng(rng, f)
+
 	def get_prop(self, prop):
 		return self.__all_properties[prop]
 
@@ -102,6 +125,9 @@ class EntityManager(object):
 			dicts.append(self.__all_properties[prop])
 		#create set of the keys in common across all dicts
 		return set.intersection(*map(set, dicts))
+
+	def clear_prop(self, prop):
+		self.__all_properties[prop].clear()
 
 	def get_value(self, i, prop, default=None):
 		return self.__all_properties[prop].get(i, default)
@@ -142,4 +168,15 @@ class EntityManager(object):
 			val = not val
 		self.set_value(i, prop, val)
 
+
+	def get_move_cost(self, pos):
+		phys = self.has_prop(pos, "physical")
+		health = self.has_prop(pos, "health")
+		if phys and not health:
+			#invulnerable
+			return math.inf
+		elif phys:
+			return 1+(self.get_value(pos, "health")//2)
+		else:
+			return 1
 

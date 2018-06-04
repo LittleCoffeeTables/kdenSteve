@@ -17,13 +17,18 @@ class MainScreen(object):
 		while EQ.can_get("move_camera", i):
 			event = EQ.get("move_camera", i)
 			i+=1
-			self.update_coords(event["to"])
+			self.update_coords(event["to"], (whereto[2]-whereto[0],
+					whereto[3]-whereto[1]))
 
 		entities = EM.get_prop("r_prio").items()
 		priorities = sorted(entities, key=lambda x: x[1])
 		for entity, priority in priorities:
 			pos = EM.get_value(entity, "r_pos")
 			char = EM.get_value(entity, "r_char")
+			#if EM.has_prop(pos, "0_from"):
+			#	val = EM.get_value(pos, "0_from")
+			#	#if val < 10:
+			#	char = str(val)[1:2]
 			attrs = 0
 			fg_colour = EM.get_value(entity, "r_colour",
 					curses.COLOR_WHITE)

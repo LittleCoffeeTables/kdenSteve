@@ -26,7 +26,7 @@ def main(stdscr):
 		"r_char":"@", "r_pos":(3,7), "r_prio":900, "camera":True,
 		"health":30, "attack_dmg":6, "blood":1000,
 		"r_colour": curses.COLOR_BLACK,
-		"ap":3, "max_ap":3})
+		"ap":3, "max_ap":3, "dijkstra_target":True})
 
 	d_size = (100, 100)
 

@@ -34,25 +34,21 @@ class InputHandler(object):
 		except curses.error:
 			return
 		#EQ.put("debug", {"text":"input %s %i"%(key, i)})
-		#moved = False
 		if key in kcfg.quit:
 			EQ.put("quit", {})
 		elif key in kcfg.up:
 			EQ.put("move_or_attack", {"eid":i, "dir":(0,-1)})
-		#	moved = True
 		elif key in kcfg.down:
 			EQ.put("move_or_attack", {"eid":i, "dir":(0,1)})
-		#	moved = True
 		elif key in kcfg.left:
 			EQ.put("move_or_attack", {"eid":i, "dir":(-1,0)})
-		#	moved = True
 		elif key in kcfg.right:
 			EQ.put("move_or_attack", {"eid":i, "dir":(1,0)})
-		#	moved = True
+		elif key in kcfg.wait:
+			EQ.put("move_or_attack", {"eid":i, "dir":(0,0)})
 		else:
 			#curses.beep()
 			pass
+			#EQ.put("debug", {"text":"%s" % key})
 		EQ.put("refresh", {})
-		#if moved:
-		#	EQ.put("take_turn", {"eid":0})
 

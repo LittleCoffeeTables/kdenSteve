@@ -7,6 +7,7 @@ import system_attack
 import system_corpses
 import system_ai
 import system_actions
+import system_dijkstra
 
 import collections
 
@@ -24,6 +25,7 @@ class SystemsManager(object):
 				system_attack.Attacks(),
 				system_movement.Movement(),
 				system_corpses.Corpses(),
+				system_dijkstra.Dijkstra(),
 				system_render.Renderer(stdscr, MS),
 				system_logger.Logger(),
 				]

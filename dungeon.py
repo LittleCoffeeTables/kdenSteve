@@ -11,7 +11,8 @@ class Dungeon(object):
 				material = "floor"
 				if (x == 0 or y == 0
 				 or x == self.__size[0] - 1
-				 or y == self.__size[1] - 1):
+				 or y == self.__size[1] - 1
+				 or x == y == 5):
 					material = "wall"
 				self.create_tile(pos, material)
 		self.populate()
@@ -20,6 +21,7 @@ class Dungeon(object):
 	def populate(self):
 		#place monsters and shiz
 		self.__EM.quick_entity("orc", (20,10))
+		self.__EM.quick_entity("orc", (28, 7))
 
 	def create_tile(self, pos, mat):
 		if mat == "wall":
